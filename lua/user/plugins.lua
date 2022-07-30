@@ -15,7 +15,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- Autocommand that feloads neovim whenever you save the plugins.lua file
 vim.cmd [[
   augroup packer_user_config
     autocmd!
@@ -47,6 +47,7 @@ return packer.startup(function(use)
   use { "rktjmp/shipwright.nvim" }
   use { "mcchrish/zenbones.nvim", requires = "rktjmp/lush.nvim" } 
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use { "alvan/vim-closetag" }
   use {
   "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -57,6 +58,20 @@ return packer.startup(function(use)
   }
   use "lewis6991/gitsigns.nvim"
   use "ibhagwan/fzf-lua"
+  use({
+    "ggandor/leap.nvim",
+    config = function()
+        require("leap").set_default_keymaps()
+    end
+  })
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  })
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
